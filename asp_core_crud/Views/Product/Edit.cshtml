@@ -1,0 +1,55 @@
+﻿@model asp_core_crud.Models.Product
+
+<h2>Ürünü Düzenle</h2>
+
+<form asp-action="Edit" method="post">
+    <input type="hidden" asp-for="Id" />
+
+    <div class="form-group">
+        <label asp-for="Name"></label>
+        <input asp-for="Name" class="form-control" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Price"></label>
+        <input asp-for="Price" type="number" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CategoryId"></label>
+        <select asp-for="CategoryId" class="form-control" asp-items="ViewBag.Categories"></select>
+        <span asp-validation-for="CategoryId" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Etiketler</label>
+        @foreach (var tag in (List<asp_core_crud.Models.Tag>)ViewBag.Tags)
+        {
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox"
+                       name="SelectedTags" value="@tag.Id"
+                @(Model.Tags != null && Model.Tags.Any(t => t.Id == tag.Id) ? "checked" : "") />
+                <label class="form-check-label">@tag.Name</label>
+            </div>
+        }
+    </div>
+
+    <div class="form-group">
+        <label>Açıklama</label>
+        <textarea name="Description" class="form-control">@Model.ProductDetail?.Description</textarea>
+    </div>
+
+    <div class="form-group">
+        <label>Üretici</label>
+        <input type="text" name="Manufacturer" value="@Model.ProductDetail?.Manufacturer" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+    <a asp-action="Index" class="btn btn-secondary">Geri</a>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,34 @@
+﻿@model asp_core_crud.Models.Product
+
+<h2>Ürün Detayı</h2>
+
+<h4>@Model.Name</h4>
+<p>Fiyat: @Model.Price.ToString("C")</p>
+
+<p><strong>Kategori:</strong> @Model.Category?.Name</p>
+
+<p>
+    <strong>Etiketler:</strong>
+    @if (Model.Tags != null && Model.Tags.Count > 0)
+    {
+        foreach (var tag in Model.Tags)
+        {
+            @tag.Name
+            if (tag != Model.Tags.Last())
+            {
+                <text>, </text>
+            }
+        }
+    }
+    else
+    {
+        <text>Etiket yok</text>
+    }
+</p>
+
+<p><strong>Açıklama:</strong> @Model.ProductDetail?.Description</p>
+<p><strong>Üretici:</strong> @Model.ProductDetail?.Manufacturer</p>
+
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Düzenle</a>
+<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Sil</a>
+<a asp-action="Index" class="btn btn-secondary">Geri</a>

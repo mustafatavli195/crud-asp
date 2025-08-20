@@ -1,0 +1,32 @@
+﻿@model IEnumerable<asp_core_crud.Models.Product>
+
+<h2>Ürünler</h2>
+
+<a asp-action="Create" class="btn btn-primary mb-3">Yeni Ürün Ekle</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>Ürün Adı</th>
+            <th>Fiyat</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Id</td>
+                <td>
+                    @* asp-action=details dediği tıklandığında details actionuna yönlendiriyor  
+               asp-route-id="@item.Id" ise id bilgisini de gönderiyor urlye *@
+                    <a asp-action="Details" asp-route-id="@item.Id">
+                        @item.Name
+                    </a>
+                </td>
+                <td>@item.Price.ToString("$0.00")</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

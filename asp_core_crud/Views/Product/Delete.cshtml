@@ -1,0 +1,15 @@
+﻿@model asp_core_crud.Models.Product
+
+<h2>Ürünü Sil</h2>
+
+<h4>Silmek istediğinizden emin misiniz?</h4>
+<div>
+    <p>@Model.Name</p>
+    <p>Fiyat: @Model.Price.ToString("C")</p>
+</div>
+
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Sil</button>
+    <a asp-action="Index" class="btn btn-secondary">İptal</a>
+</form>
